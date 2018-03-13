@@ -8,7 +8,7 @@ using Tupkach.Bot.NetStandart.ClientBot.Interfaces;
 
 namespace Tupkach.Bot.NetStandart
 {
-    class TupkachKernel : NinjectModule
+    public class TupkachKernel : NinjectModule
     {
         public override void Load()
         {

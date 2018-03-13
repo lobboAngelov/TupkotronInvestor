@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Discord;
-using Discord.Rest;
 using Discord.WebSocket;
 using Tupkach.Bot.NetStandart.ClientBot.Interfaces;
 
 namespace Tupkach.Bot.NetStandart.ClientBot
 {
-    public class ClientBot :  IClientBot
+    public class ClientBot : IClientBot
     {
         private const ulong TupkachiChannelId = 304919616780763136;
 
         private readonly DiscordSocketClient _discordSocketClient;
-        
+
         public ClientBot(DiscordSocketClient discordSocketClient)
         {
             _discordSocketClient = discordSocketClient;
-            
+
             _discordSocketClient.Connected += OnConnected;
             _discordSocketClient.Ready += OnReady;
 
@@ -49,23 +47,24 @@ namespace Tupkach.Bot.NetStandart.ClientBot
                 }
             }
 
-            var channelId = StaticData.Mode == "test" ? 340214016813301760 : TupkachiChannelId;
-
             await _discordSocketClient.SetGameAsync("Minecraft 1.7.10");
         }
 
-        private Task OnConnected()
+        private async Task OnConnected()
         {
             Console.WriteLine("Connected");
-            return Task.Delay(0);
+            await Task.FromResult((Task) null);
         }
 
         public async Task StartAsync() => await _discordSocketClient.StartAsync();
 
         public void Log(string message)
         {
-            Console.WriteLine(_discordSocketClient.TokenType);
-            Console.WriteLine(_discordSocketClient.ConnectionState);
+            var socketGuild = _discordSocketClient.Guilds.First(x => x.Id == TupkachiChannelId);
+            var socketTextChannel = socketGuild.TextChannels
+                .FirstOrDefault(x => x.Name == "bot_log");
+
+            socketTextChannel?.SendMessageAsync(message);
         }
     }
 }

@@ -28,9 +28,9 @@ namespace Tupkach.Bot.NetStandart.ClientBot
         {
             if (message is SocketUserMessage userMessage)
             {
-                var context = new TupkachCommandContext(_client,userMessage, _lifetimeScope);
+                var context = new TupkachCommandContext(_client, userMessage, _lifetimeScope);
                 var argPos = 0;
-                if (userMessage.HasStringPrefix("kur ",ref argPos, StringComparison.InvariantCultureIgnoreCase))
+                if (userMessage.HasStringPrefix("kur ", ref argPos, StringComparison.InvariantCultureIgnoreCase))
                 {
                     var result = await _service.ExecuteAsync(context, argPos);
 
@@ -44,12 +44,12 @@ namespace Tupkach.Bot.NetStandart.ClientBot
 
         private void SendAll()
         {
-            
+
         }
 
         public void Execute()
         {
-            
+
         }
     }
 }
