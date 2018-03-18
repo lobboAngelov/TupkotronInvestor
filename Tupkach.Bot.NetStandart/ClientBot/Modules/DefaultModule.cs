@@ -39,6 +39,12 @@ namespace Tupkach.Bot.NetStandart.ClientBot.Modules
                 "https://cdn.discordapp.com/attachments/304919616780763136/418538952325333022/e7c229d8e532aa5340b23e4c605a7b8c--black-kids-funny-memes.jpg");
         }
 
+        [Command("Smazan")]
+        public async Task Smazan()
+        {
+            await Context.Channel.SendFileAsync("Content/Smazan.png");
+        }
+
         [Command("komandi")]
         public async Task Commands()
         {
@@ -63,8 +69,14 @@ namespace Tupkach.Bot.NetStandart.ClientBot.Modules
         [Command("Kill")]
         public async Task Die()
         {
-            await Context.Channel.SendMessageAsync("Niggers", true);
-            Environment.Exit(-1);
+            await Context.Channel.SendMessageAsync("Nqma poveche umirane");
+            var task = Task.Run(async () =>
+            {
+                await Task.Delay(15000);
+                await Context.Channel.SendFileAsync("Smeshnik");
+            });
+            await task;
+            //Environment.Exit(-1);
         }
     }
 }
