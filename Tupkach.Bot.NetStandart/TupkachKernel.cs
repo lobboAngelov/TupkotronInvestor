@@ -10,7 +10,7 @@ using Tupkach.Bot.NetStandart.Services;
 
 namespace Tupkach.Bot.NetStandart
 {
-    class TupkachKernel : NinjectModule
+    public class TupkachKernel : NinjectModule
     {
         public override void Load()
         {
