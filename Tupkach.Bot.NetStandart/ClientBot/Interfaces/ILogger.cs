@@ -1,7 +1,9 @@
-﻿namespace Tupkach.Bot.NetStandart.ClientBot.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace Tupkach.Bot.NetStandart.ClientBot.Interfaces
 {
     public interface ILogger
     {
-        void Log(string message);
+        Task LogAsync(string message);
     }
 }

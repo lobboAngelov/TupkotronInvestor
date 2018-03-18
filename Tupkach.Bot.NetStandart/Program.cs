@@ -13,25 +13,19 @@ namespace Tupkach.Bot.NetStandart
         public static void Main(string[] args)
         {
             new Program().MainAsync(args).GetAwaiter().GetResult();
-        }
-            
+        }   
         
-
         public async Task MainAsync(string[] args)
         {
             using (IKernel kernel = new StandardKernel(new TupkachKernel()))
             {
-                if (args.Contains("test"))
-                {
-                    
-                }
                 StaticData.LifetimeScope = kernel;
                 kernel.Load(Assembly.GetExecutingAssembly());
                 var bot = kernel.Get<IClientBot>();
                 var handler = kernel.Get<ICommandHandler>();
                 handler.Execute();
                 await bot.StartAsync();
-                bot.Log("Kur za neshtastieto");
+                await bot.LogAsync("Kur za neshtastieto");
                 await Task.Delay(-1);
             }
         }

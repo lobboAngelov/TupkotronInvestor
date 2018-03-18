@@ -69,8 +69,14 @@ namespace Tupkach.Bot.NetStandart.ClientBot.Modules
         [Command("Kill")]
         public async Task Die()
         {
-            await Context.Channel.SendMessageAsync("Niggers", true);
-            Environment.Exit(-1);
+            await Context.Channel.SendMessageAsync("Nqma poveche umirane");
+            var task = Task.Run(async () =>
+            {
+                await Task.Delay(15000);
+                await Context.Channel.SendFileAsync("Smeshnik");
+            });
+            await task;
+            //Environment.Exit(-1);
         }
     }
 }

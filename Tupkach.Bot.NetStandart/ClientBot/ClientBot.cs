@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Discord;
-using Discord.Rest;
 using Discord.WebSocket;
 using Tupkach.Bot.NetStandart.ClientBot.Interfaces;
+using Tupkach.Bot.NetStandart.Services.Interfaces;
 
 namespace Tupkach.Bot.NetStandart.ClientBot
 {
     public class ClientBot : IClientBot
-    {
-        private const ulong TupkachiChannelId = 304919616780763136;
-
+    {     
         private readonly DiscordSocketClient _discordSocketClient;
-        
-        public ClientBot(DiscordSocketClient discordSocketClient)
+        private readonly IConfigurationProvider _configurationProvider;
+
+        private SocketGuild _mainServer;
+        private SocketTextChannel _logChannel;
+
+        public ClientBot(DiscordSocketClient discordSocketClient, IConfigurationProvider configurationProvider)
         {
             _discordSocketClient = discordSocketClient;
-            
+            _configurationProvider = configurationProvider;
             _discordSocketClient.Connected += OnConnected;
             _discordSocketClient.Ready += OnReady;
 
@@ -26,14 +27,10 @@ namespace Tupkach.Bot.NetStandart.ClientBot
 
         private async Task OnVoiceChange(SocketUser socketUser, SocketVoiceState oldVoiceState, SocketVoiceState newVoiceState)
         {
-            var socketGuild = _discordSocketClient.Guilds.First(x => x.Id == TupkachiChannelId);
-            var socketTextChannel = socketGuild.TextChannels
-                .First(x => x.Name == "voice_log");
-
             var symbol = oldVoiceState.ToString() == "Unknown" ? ":heavy_plus_sign:" : ":heavy_minus_sign:";
 
             var message = $"**{socketUser.Username}** {symbol} __**Voice**__";
-            await socketTextChannel.SendMessageAsync(message);
+            await LogAsync(message);
         }
 
         private async Task OnReady()
@@ -49,7 +46,12 @@ namespace Tupkach.Bot.NetStandart.ClientBot
                 }
             }
 
-            var channelId = StaticData.Mode == "test" ? 340214016813301760 : TupkachiChannelId;
+            _mainServer = _discordSocketClient.Guilds.FirstOrDefault(x => x.Name == _configurationProvider.GetConfigurationParameter(StaticData.ServerNameConfigurationKey));
+            if (_mainServer == null)
+            {
+                Console.WriteLine("Main server not found, Logging will not be availale");
+            }
+            _logChannel = _mainServer.TextChannels.First(x => x.Name == _configurationProvider.GetConfigurationParameter(StaticData.LogChannelConfigurationKey));
 
             await _discordSocketClient.SetGameAsync("Minecraft 1.7.10");
         }
@@ -62,10 +64,13 @@ namespace Tupkach.Bot.NetStandart.ClientBot
 
         public async Task StartAsync() => await _discordSocketClient.StartAsync();
 
-        public void Log(string message)
+        public async Task LogAsync(string message)
         {
             Console.WriteLine(message);
-
+            if (_logChannel != null)
+            {
+                await _logChannel?.SendMessageAsync(message);
+            }           
         }
     }
 }
