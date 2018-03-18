@@ -1,10 +1,12 @@
-﻿using System;
-using Discord;
-using Discord.Commands;
+﻿using Discord.Commands;
 using Discord.WebSocket;
 using Ninject.Modules;
+using Ninject;
+
 using Tupkach.Bot.NetStandart.ClientBot;
 using Tupkach.Bot.NetStandart.ClientBot.Interfaces;
+using Tupkach.Bot.NetStandart.Services.Interfaces;
+using Tupkach.Bot.NetStandart.Services;
 
 namespace Tupkach.Bot.NetStandart
 {
@@ -12,18 +14,12 @@ namespace Tupkach.Bot.NetStandart
     {
         public override void Load()
         {
+            Bind<IConfigurationProvider>().To<ConfigurationProvider>().InSingletonScope();
+            Bind<ISocketClientFactory>().To<SocketClientFactory>().InSingletonScope();
+
             Bind<DiscordSocketClient>().ToMethod(ctx =>
             {
-                Console.WriteLine("Creating socket");
-                var client = new DiscordSocketClient();
-
-                const string testBotToken = "NDIwNjE5ODAyMTI2NzEyODMy.DYBUSA.16bIIsU4TT6zD9uoBVP1H2H_dO0";
-                const string releaseBotToken = "MzcxOTU5NTQ4Nzk1NDIwNjg0.DYBinQ.lrx7bzlHiPPvxDkvoLFV9W2rfdM";
-
-                var token = StaticData.Mode == "test" ? testBotToken : releaseBotToken;
-                client.LoginAsync(TokenType.Bot, token).Wait();
-
-                return client;
+                return ctx.Kernel.Get<ISocketClientFactory>().CreateSocketClientAsync().Result;
             }).InSingletonScope();
 
             Bind<CommandService>().ToSelf().InSingletonScope();

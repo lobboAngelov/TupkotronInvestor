@@ -95,14 +95,28 @@
     <Compile Include="ClientBot\Modules\CryptoModule.cs" />
     <Compile Include="ClientBot\Modules\DefaultModule.cs" />
     <Compile Include="ClientBot\Modules\SchedulerModule.cs" />
+    <Compile Include="Infrastructure\ConfigurationFieldAttribute.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ConfigurationProvider.cs" />
+    <Compile Include="Services\Interfaces\IConfigurationProvider.cs" />
+    <Compile Include="Services\Interfaces\ISocketClientFactory.cs" />
     <Compile Include="StaticData.cs" />
     <Compile Include="TupkachKernel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Configuration\config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\smazan.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
