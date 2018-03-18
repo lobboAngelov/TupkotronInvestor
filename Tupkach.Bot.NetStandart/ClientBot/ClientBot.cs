@@ -8,7 +8,7 @@ using Tupkach.Bot.NetStandart.ClientBot.Interfaces;
 
 namespace Tupkach.Bot.NetStandart.ClientBot
 {
-    public class ClientBot :  IClientBot
+    public class ClientBot : IClientBot
     {
         private const ulong TupkachiChannelId = 304919616780763136;
 
@@ -54,18 +54,18 @@ namespace Tupkach.Bot.NetStandart.ClientBot
             await _discordSocketClient.SetGameAsync("Minecraft 1.7.10");
         }
 
-        private Task OnConnected()
+        private async Task OnConnected()
         {
             Console.WriteLine("Connected");
-            return Task.Delay(0);
+            await Task.FromResult((Task)null);
         }
 
         public async Task StartAsync() => await _discordSocketClient.StartAsync();
 
         public void Log(string message)
         {
-            Console.WriteLine(_discordSocketClient.TokenType);
-            Console.WriteLine(_discordSocketClient.ConnectionState);
+            Console.WriteLine(message);
+
         }
     }
 }

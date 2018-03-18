@@ -39,6 +39,12 @@ namespace Tupkach.Bot.NetStandart.ClientBot.Modules
                 "https://cdn.discordapp.com/attachments/304919616780763136/418538952325333022/e7c229d8e532aa5340b23e4c605a7b8c--black-kids-funny-memes.jpg");
         }
 
+        [Command("Smazan")]
+        public async Task Smazan()
+        {
+            await Context.Channel.SendFileAsync("Content/Smazan.png");
+        }
+
         [Command("komandi")]
         public async Task Commands()
         {
