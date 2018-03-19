@@ -45,6 +45,20 @@ namespace Tupkach.Bot.NetStandart.ClientBot.Modules
             await Context.Channel.SendFileAsync("Content/Smazan.png");
         }
 
+        [Command("Senor")]
+        public async Task Hilter()
+        {
+            await Context.Channel.SendMessageAsync("Sieg Hilter!");
+            await Context.Channel.SendFileAsync("Content/senor.png");
+        }
+
+        [Command("smazan kalo")]
+        public async Task Kalo()
+        {
+            await Context.Channel.SendMessageAsync("Калоян е смазан :))");
+            await Context.Channel.SendFileAsync("Content/kalo.jpg");
+        }
+
         [Command("komandi")]
         public async Task Commands()
         {
