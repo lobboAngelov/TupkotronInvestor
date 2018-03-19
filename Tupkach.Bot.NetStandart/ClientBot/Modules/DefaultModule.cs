@@ -40,9 +40,25 @@ namespace Tupkach.Bot.NetStandart.ClientBot.Modules
         }
 
         [Command("Smazan")]
-        public async Task Smazan()
+        public async Task Smazan(string str)
         {
-            await Context.Channel.SendFileAsync("Content/Smazan.png");
+            var person = Context.Message.MentionedUsers.First().ToString().Split('#').Last();
+
+            switch (person)
+            {
+                case "3211":
+                    await Context.Channel.SendFileAsync("Content/kalo.jpg");
+                    break;
+                case "4359":
+                    await Context.Channel.SendFileAsync("Content/lobo.png");
+                    break;
+                case "8084":
+                    await Context.Channel.SendFileAsync("Content/tsekov.png");
+                    break;
+                default:
+                    await Context.Channel.SendFileAsync("Content/Smazan.png");
+                    break;
+            }
         }
 
         [Command("Senor")]
@@ -50,13 +66,6 @@ namespace Tupkach.Bot.NetStandart.ClientBot.Modules
         {
             await Context.Channel.SendMessageAsync("Sieg Hilter!");
             await Context.Channel.SendFileAsync("Content/senor.png");
-        }
-
-        [Command("smazan kalo")]
-        public async Task Kalo()
-        {
-            await Context.Channel.SendMessageAsync("Калоян е смазан :))");
-            await Context.Channel.SendFileAsync("Content/kalo.jpg");
         }
 
         [Command("komandi")]
@@ -90,7 +99,7 @@ namespace Tupkach.Bot.NetStandart.ClientBot.Modules
                 await Context.Channel.SendFileAsync("Smeshnik");
             });
             await task;
-            //Environment.Exit(-1);
+            Environment.Exit(-1);
         }
     }
 }
