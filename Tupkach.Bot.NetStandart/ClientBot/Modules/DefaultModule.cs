@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using Discord.Commands;
 using Tupkach.Bot.NetStandart.ClientBot.Context;
@@ -19,7 +20,7 @@ namespace Tupkach.Bot.NetStandart.ClientBot.Modules
         [Command("BigIron")]
         public async Task BigIron()
         {
-            var targetDate = new DateTime(2018,8,5);
+            var targetDate = new DateTime(2018, 8, 5);
             var daysLeft = (targetDate - DateTime.Now).Days;
             await Context.Channel.SendMessageAsync($"{daysLeft} days until B I G   I R O N");
         }
@@ -76,17 +77,25 @@ namespace Tupkach.Bot.NetStandart.ClientBot.Modules
                 .SelectMany(x => x.GetTypes())
                 .Where(x => type.IsAssignableFrom(x));
 
+            var builder = new StringBuilder();
             var commands = new List<CommandAttribute>();
+
+            builder.AppendLine("```");
             foreach (var module in modules)
             {
-                commands.AddRange(module.GetMethods()
+                builder.AppendLine($"{module.ToString()}:");
+
+                foreach (var method in
+                module.GetMethods()
                     .Select(x => x.GetCustomAttribute<CommandAttribute>())
-                    .Where(x => x != null));
+                    .Where(x => x != null))
+                {
+                    builder.AppendLine($"   {method.Text}");
+                }
             }
-            foreach (var commandAttribute in commands)
-            {
-                await Context.Channel.SendMessageAsync(commandAttribute.Text.ToLower());
-            }
+            builder.AppendLine("```");
+
+            await Context.Channel.SendMessageAsync(builder.ToString());
         }
 
         [Command("Kill")]

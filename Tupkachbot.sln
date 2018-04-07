@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.26228.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tupkach.Bot.NetStandart", "Tupkach.Bot.NetStandart\Tupkach.Bot.NetStandart.csproj", "{8ADDD39A-6EF9-408B-BA84-45710C75DFC9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tupkach.Bot.Infrastructure", "Tupkach.Bot.Infrastructure\Tupkach.Bot.Infrastructure.csproj", "{56307F14-0AD9-4C22-B2AC-EB2E10F3B282}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tupkach.Bot.Infrastructure.Entities", "Tupkach.Bot.Infrastructure.Entities\Tupkach.Bot.Infrastructure.Entities.csproj", "{2D59960D-6A23-4011-B207-E3EA50D7770B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +19,19 @@ Global
 		{8ADDD39A-6EF9-408B-BA84-45710C75DFC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8ADDD39A-6EF9-408B-BA84-45710C75DFC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8ADDD39A-6EF9-408B-BA84-45710C75DFC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56307F14-0AD9-4C22-B2AC-EB2E10F3B282}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56307F14-0AD9-4C22-B2AC-EB2E10F3B282}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56307F14-0AD9-4C22-B2AC-EB2E10F3B282}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56307F14-0AD9-4C22-B2AC-EB2E10F3B282}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D59960D-6A23-4011-B207-E3EA50D7770B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D59960D-6A23-4011-B207-E3EA50D7770B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D59960D-6A23-4011-B207-E3EA50D7770B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D59960D-6A23-4011-B207-E3EA50D7770B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6FD12207-FCE7-41FE-B65C-BB983C5E6613}
 	EndGlobalSection
 EndGlobal
