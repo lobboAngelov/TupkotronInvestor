@@ -7,6 +7,7 @@ using Tupkach.Bot.NetStandart.ClientBot;
 using Tupkach.Bot.NetStandart.ClientBot.Interfaces;
 using Tupkach.Bot.NetStandart.Services.Interfaces;
 using Tupkach.Bot.NetStandart.Services;
+using Tupkach.Bot.Infrastructure;
 
 namespace Tupkach.Bot.NetStandart
 {
@@ -26,6 +27,9 @@ namespace Tupkach.Bot.NetStandart
             Bind<IClientBot,ILogger>().To<ClientBot.ClientBot>().InSingletonScope();
             Bind<ICommandHandler>().To<CommandHandler>().InSingletonScope();
             Bind<IScheduler>().To<Scheduler>().InSingletonScope();
+
+            Bind<TupkachDbContext>().To<TupkachDbContext>();
+            Bind<IRepository>().To<TupkachRepository>();
         }
     }
 }

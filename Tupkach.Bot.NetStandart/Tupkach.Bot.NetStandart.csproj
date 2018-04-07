@@ -8,9 +8,10 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Tupkach.Bot.NetStandart</RootNamespace>
     <AssemblyName>Tupkach.Bot.NetStandart</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,6 +51,12 @@
     <Reference Include="Discord.Net.WebSocket, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Discord.Net.WebSocket.1.0.2\lib\net45\Discord.Net.WebSocket.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.DependencyInjection, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.1.1.1\lib\netstandard1.1\Microsoft.Extensions.DependencyInjection.dll</HintPath>
     </Reference>
@@ -67,6 +74,7 @@
       <HintPath>..\packages\System.Collections.Immutable.1.3.1\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Interactive.Async, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Interactive.Async.3.1.1\lib\net45\System.Interactive.Async.dll</HintPath>
@@ -91,6 +99,7 @@
     <Compile Include="ClientBot\Interfaces\IClientBot.cs" />
     <Compile Include="ClientBot\Interfaces\ILogger.cs" />
     <Compile Include="ClientBot\Interfaces\IScheduler.cs" />
+    <Compile Include="ClientBot\Modules\WorkoutModule.cs" />
     <Compile Include="ClientBot\Scheduler.cs" />
     <Compile Include="ClientBot\Modules\CryptoModule.cs" />
     <Compile Include="ClientBot\Modules\DefaultModule.cs" />
@@ -127,6 +136,16 @@
     <Content Include="Content\tsekov.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tupkach.Bot.Infrastructure.Entities\Tupkach.Bot.Infrastructure.Entities.csproj">
+      <Project>{2D59960D-6A23-4011-B207-E3EA50D7770B}</Project>
+      <Name>Tupkach.Bot.Infrastructure.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tupkach.Bot.Infrastructure\Tupkach.Bot.Infrastructure.csproj">
+      <Project>{56307f14-0ad9-4c22-b2ac-eb2e10f3b282}</Project>
+      <Name>Tupkach.Bot.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
